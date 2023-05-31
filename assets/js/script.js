@@ -29,16 +29,25 @@ $(document).ready(function() {
 
 
     $("#" + timeBlockId + " .saveBtn").on("click", createSaveButtonHandler(timeBlockId));
-  }
 
-  // Save button click event handler
+  //save button
   function createSaveButtonHandler(timeBlockId) {
     return function() {
       var text = $("#" + timeBlockId + " textarea").val();
       localStorage.setItem(timeBlockId, text);
-    } 
-}
+    };
+  }
+  // Save All Button 
+  $('#saveAllButton').on('click', function() {
+    for (var i = 9; i <= 17; i++) {
+      var timeBlockId = "hour-" + i;
+      var text = $("#" + timeBlockId + " textarea").val();
+      localStorage.setItem(timeBlockId, text);
+    }
+  });
+  }
 
+//color coding based on current time
 var currentHour = dayjs().format('hA');
   for (var i = 9; i <= 17; i++) {
     var timeBlockId = "hour-" + i;
@@ -50,10 +59,7 @@ var currentHour = dayjs().format('hA');
     }
     else {
       $("#" + timeBlockId + " textarea").addClass("future");
-    }
-    
-
+    }  
 }
-
 }
 );
